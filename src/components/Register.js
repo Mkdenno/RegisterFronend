@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-
+const url="http://localhost:3000/users"
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -23,21 +23,33 @@ const Register = () => {
     }
 
     console.log(inputData)
+    fetch(`${url}`, {
+            mode: "no-cors",
 
-    fetch("http://localhost:3000/signup", {
-      mode: "no-cors",
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
       },
       body: JSON.stringify(inputData),
-    }).then((response) => {
+    })
+    .then((res) => {
+      console.log("success")
+    })
 
-    });
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setPasswordConfirmation("");
+  //   fetch("/users", {
+  //     mode: "no-cors",
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(inputData),
+  //   }).then((response) => {
+
+  //   });
+  //   setUsername("");
+  //   setEmail("");
+  //   setPassword("");
+  //   setPasswordConfirmation("");
   };
   
 
