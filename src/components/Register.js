@@ -25,28 +25,14 @@ const Register = () => {
     console.log(inputData)
 
     fetch("http://localhost:3000/signup", {
+      mode: "no-cors",
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        user: inputData,
-      }),
+      body: JSON.stringify(inputData),
     }).then((response) => {
 
-      if (response.ok) {
-
-        response.json().then((user) => {
-          console.log(user)
-        });
-        navigate("/login");
-      } else {
-        response.json().then((errorData) => {
-          console.log(errorData)
-
-          setErrors(errorData.errors)
-        });
-      }
     });
     setUsername("");
     setEmail("");
@@ -69,7 +55,7 @@ const Register = () => {
               type="text"
               name="username"
               value={username}
-              onChange={((e)=>setUsername(e.target.value))}
+              onChange={(e) => setUsername(e.target.value)}
               className="rounded-lg bg-gray-200 mt-2  p-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
@@ -77,9 +63,9 @@ const Register = () => {
             <label className="">Email</label>
             <input
               type="email"
-              name="username"
+              name="email"
               value={email}
-              onChange={((e)=>setEmail(e.target.value))}
+              onChange={(e) => setEmail(e.target.value)}
               className="rounded-lg bg-gray-200 mt-2  p-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
@@ -87,9 +73,9 @@ const Register = () => {
             <label className="">Password</label>
             <input
               type="password"
-              name="username"
+              name="password"
               value={password}
-              onChange={((e)=>setPassword(e.target.value))}
+              onChange={(e) => setPassword(e.target.value)}
               className="rounded-lg bg-gray-200 mt-2  p-2 focus:border-blue-500 focus:outline-none "
             />
           </div>
@@ -97,9 +83,10 @@ const Register = () => {
             <label className=""> Confirm Password</label>
             <input
               type="password"
-              name="username"
+              name="confirm_password"
               value={passwordConfirmation}
-              onChange={((e)=>setPasswordConfirmation(e.target.value))}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
+
               className="rounded-lg bg-gray-200 mt-2  p-2 focus:border-blue-500 focus:outline-none "
             />
           </div>
