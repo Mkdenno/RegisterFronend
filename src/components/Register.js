@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const url="http://localhost:3000/users"
+const url="http://localhost:3000/signup"
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -24,34 +24,33 @@ const Register = () => {
 
     console.log(inputData)
     fetch(`${url}`, {
-            mode: "no-cors",
-
       method: "POST",
       headers: {
-        "content-type": "application/json",
-      },
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'      },
       body: JSON.stringify(inputData),
     })
-    .then((res) => {
-      console.log("success")
-    })
+    .then((response) => {
 
-  //   fetch("/users", {
-  //     mode: "no-cors",
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(inputData),
-  //   }).then((response) => {
+      if (response.ok) {
 
-  //   });
-  //   setUsername("");
-  //   setEmail("");
-  //   setPassword("");
-  //   setPasswordConfirmation("");
+        response.json().then((user) => {
+          console.log(user)
+        });
+        navigate("/login");
+      } else {
+        response.json().then((errorData) => {
+          console.log(errorData)
+
+          setErrors(errorData.errors)
+        });
+      }
+    });
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setPasswordConfirmation("");
   };
-  
 
   return (
     <div className="  grid grid-cols-1 sm:grid-cols-2 h-screen w-full">
