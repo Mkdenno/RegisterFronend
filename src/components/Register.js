@@ -24,7 +24,7 @@ const Register = () => {
 
     console.log(inputData)
 
-    fetch("http://localhost:3000/signup", {
+    fetch("/signup", {
       method: "POST",
       headers: {
         "content-type": "application/json",
