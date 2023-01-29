@@ -6,36 +6,32 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
 import { useEffect, useState } from "react";
 
-const url = "http://localhost:3000/profile";
+const url = "http://localhost:3000/me";
 
 function App() {
   const [user, setUser] = useState(null);
-  // const token = localStorage.getItem("jwt");
+  console.log(user)
 
   useEffect(() => {
-    fetch(`${url}`)
-      .then((res) => res.json())
-      .then((data) => setUser(data));
-  });
+    // auto-login
+    fetch(`${url}`).then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
+
 
   return (
     <div className="App">
-      <Navbar setUser={setUser} user={user} />
+      <Navbar setUser={setUser} user={user}/>
       <Routes>
-        {
-          user ?
-          (
-            <Route path="/" element={<Home  user={user}/>} />
-          ):
-          (
-            <>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login  setUser={setUser}/>}/>
-            </>
 
-          )
-        }
+            <Route path="/" element={<Home user={user} />} />
+
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login  setUser={setUser} />}/>
 
       </Routes>
     </div>

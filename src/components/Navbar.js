@@ -2,14 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-
 const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
 
   const handleLogoutButton = () => {
     setUser(null);
     navigate("/login");
- 
   };
 
   return (
@@ -19,20 +17,19 @@ const Navbar = ({ user, setUser }) => {
           <a class="text-white p-2">Home</a>
         </Link>
 
-        <Link to="/register">
-          <a class="text-white p-2">Register</a>
-        </Link>
         {user ? (
-          <button
-        className="text-red-600 p-3 "
-            onClick={handleLogoutButton}
-          >
+          <button className="text-red-600 p-3 " onClick={handleLogoutButton}>
             Logout
           </button>
         ) : (
-          <Link to="/login">
-            <a class="text-white p-2">Login</a>
-          </Link>
+          <>
+            <Link to="/login">
+              <a class="text-white p-2">Login</a>
+            </Link>
+            <Link to="/register">
+              <a class="text-white p-2">Register</a>
+            </Link>
+          </>
         )}
       </nav>
     </div>
