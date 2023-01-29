@@ -22,9 +22,21 @@ function App() {
     <div className="App">
       <Navbar setUser={setUser} user={user} />
       <Routes>
-        <Route path="/" element={<Home  user={user}/>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login  setUser={setUser}/>} />
+        {
+          user ?
+          (
+            <Route path="/" element={<Home  user={user}/>} />
+          ):
+          (
+            <>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login  setUser={setUser}/>}/>
+            </>
+
+          )
+        }
+
       </Routes>
     </div>
   );
