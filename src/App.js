@@ -6,7 +6,9 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
 import { useEffect, useState } from "react";
 
-const url = "http://localhost:3000/me";
+// const url = "http://localhost:3000/me";
+const url = "https://mywebbackend.onrender.com/me";
+// https://mywebbackend.onrender.com/
 
 function App() {
   const [user, setUser] = useState(null);
